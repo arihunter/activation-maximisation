@@ -73,20 +73,6 @@ def maximize_neuron_activation_hidden_state(
     best_hidden_state = None
     best_iteration = -1
 
-    def forward_from_hidden_wrong(hidden_state, target_layer):
-        """Forward pass from a specific hidden state through remaining layers"""
-        current_hidden = hidden_state
-
-        # Get the target transformer layer
-        if hasattr(model, "transformer"):
-            layer = model.transformer.h[target_layer]
-        else:
-            layer = model.model.layers[target_layer]
-
-        # Forward through the target layer
-        outputs = layer(current_hidden)
-        return outputs[0]  # Return the hidden state output
-
     def forward_from_hidden(hidden_state, target_layer):
         """Forward pass from a specific hidden state through remaining layers"""
         batch_size, seq_length = hidden_state.shape[:2]
